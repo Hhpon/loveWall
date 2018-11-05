@@ -24,9 +24,8 @@ module.exports = {
       ref  : 'origin/master',
       repo : 'git@github.com:Hhpon/loveWall.git',
       path : '/home/dc2-user/www/website/loveWall',
-      'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production',
       ssh_options: 'StrictHostKeyChecking=no',
-      'post-deploy': 'sudo npm install --registry=https://registry.npm.taobao.org && grunt build && pm2 startOrRestart ecosystem.config.js --env production',
+      'post-deploy': 'npm install --registry=https://registry.npm.taobao.org && grunt build && pm2 reload ecosystem.config.js --env production',
       env:{
         NODE_ENV: 'production'
       }
