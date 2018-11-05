@@ -18,13 +18,17 @@ module.exports = {
   }],
 
   deploy : {
-    production : {
+    loveWall : {
       user : 'dc2-user',
       host : '117.51.157.5',
       ref  : 'origin/master',
-      repo : 'git@github.com:repo.git',
-      path : '/var/www/production',
-      'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production'
+      repo : 'git@github.com:Hhpon/loveWall.git',
+      path : '/www/website/loveWall',
+      'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production',
+      ssh_options: 'StrictHostKeyChecking=no',
+      env:{
+        NODE_ENV: 'production'
+      }
     }
   }
 };
