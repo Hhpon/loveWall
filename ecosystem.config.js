@@ -14,12 +14,12 @@ module.exports = {
 
   deploy: {
     production: {
-      user: "dc2-user",
+      user: "hhp",
       host: "47.94.210.206",
-      port: 1221,
+      port: "1221",
       ref: "origin/master",
       repo: "git@github.com:Hhpon/loveWall.git",
-      path: "/home/dc2-user/www/website/production",
+      path: "/home/hhp/www/website/production",
       ssh_options: "StrictHostKeyChecking=no",
       "post-deploy":
         "npm install --registry=https://registry.npm.taobao.org && pm2 reload ecosystem.config.js --env production",
