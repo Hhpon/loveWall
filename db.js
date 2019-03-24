@@ -11,7 +11,4 @@ const articleSchema = new mongoose.Schema({
     biaoji : Number,
 })
 
- 
-
-
 module.exports = mongoose.model('article', articleSchema);

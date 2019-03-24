@@ -1,29 +1,30 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const bbq = require("./db");
 const article = require("./db");
+const cors = require("cors");
 
 const app = express();
 
 app.use(express.static("public"));
 app.use(bodyParser.json());
+app.use(cors());
 
 //allow custom header and CORS
-app.all("*", function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild"
-  );
-  res.header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
+// app.all("*", function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild"
+//   );
+//   res.header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
 
-  if (req.method == "OPTIONS") {
-    res.send(200);
-    /让options请求快速返回/;
-  } else {
-    next();
-  }
-});
+//   if (req.method == "OPTIONS") {
+//     res.send(200);
+//     /让options请求快速返回/;
+//   } else {
+//     next();
+//   }
+// });
 
 app.get("/", (req, res) => {
   req.send("hello world");
@@ -34,14 +35,14 @@ app.post("/article", function(req, res) {
 
   let blog = req.body;
 
-  bbq.create(blog, function(err, docs) {
+  article.create(blog, function(err, docs) {
     console.log(docs);
   });
   res.end("我收到了");
 });
 
 app.get("/getarticle1", function(req, res) {
-  bbq
+  article
     .find(function(err, doc) {
       console.log(doc);
       res.json(doc);
@@ -53,7 +54,7 @@ app.get("/getarticle1", function(req, res) {
 });
 
 app.get("/getarticle2", function(req, res) {
-  bbq
+  article
     .find({ selected: /表白/ }, function(err, doc) {
       console.log(doc);
       res.json(doc);
@@ -65,7 +66,7 @@ app.get("/getarticle2", function(req, res) {
 });
 
 app.get("/getarticle3", function(req, res) {
-  bbq
+  article
     .find({ selected: /一句/ }, function(err, doc) {
       console.log(doc);
       res.json(doc);
@@ -77,7 +78,7 @@ app.get("/getarticle3", function(req, res) {
 });
 
 app.get("/getarticle4", function(req, res) {
-  bbq
+  article
     .find({ selected: /吐槽/ }, function(err, doc) {
       console.log(doc);
       res.json(doc);
@@ -91,7 +92,7 @@ app.get("/getarticle4", function(req, res) {
 app.post("/getarticle5", function(req, res) {
   console.log(req.body);
   let sousuo = req.body.sousuo;
-  bbq
+  article
     .find({ Content: sousuo }, function(err, doc) {
       console.log(doc);
       res.json(doc);
