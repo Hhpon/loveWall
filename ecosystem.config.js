@@ -16,6 +16,7 @@ module.exports = {
     production: {
       user: "hhp",
       host: "47.94.210.206",
+      port: "1221",
       ref: "origin/master",
       repo: "git@github.com:Hhpon/loveWall.git",
       path: "/home/hhp/www/website/production",
